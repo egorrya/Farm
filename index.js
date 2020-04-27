@@ -1,7 +1,12 @@
+// Core modules
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
 
+// 3rd party modules
+const slugify = require('slugify');
+
+// Our own modules
 const replaceTemplate = require('./modules/replaceTemplate')
 
 ////////////////////////////
@@ -17,6 +22,9 @@ const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.htm
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data);
 
+const slugs = dataObj.map(el => slugify(el.productName, {lower: true}));
+console.log(slugs);
+
 const server = http.createServer((req, res) => {
     
     const { query, pathname } = url.parse(req.url,true);
@@ -25,7 +33,7 @@ const server = http.createServer((req, res) => {
     if (pathname === '/' || pathname === '/overview') {
         res.writeHead(200, {'Content-type': 'text/html'});
 
-        const cardsHtml = dataObj.map(el => replaseTemplate(tempCard, el)).join('');
+        const cardsHtml = dataObj.map(el => replaceTemplate(tempCard, el)).join('');
         const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml);
         res.end(output);
 
@@ -34,7 +42,7 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {'Content-type': 'text/html'});
         
         const product = dataObj[query.id];
-        const output = replaseTemplate(tempProduct, product);
+        const output = replaceTemplate(tempProduct, product);
         res.end(output);
 
     // API

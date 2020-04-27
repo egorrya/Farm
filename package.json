@@ -1,0 +1,25 @@
+{
+  "name": "node-farm",
+  "version": "1.0.0",
+  "description": "learning here",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egorrya/Farm.git"
+  },
+  "author": "egor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/egorrya/Farm/issues"
+  },
+  "homepage": "https://github.com/egorrya/Farm#readme",
+  "dependencies": {
+    "slugify": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
