@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/egorrya/Farm#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "slugify": "^1.4.0"
   },
   "devDependencies": {
